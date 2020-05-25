@@ -7,25 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB02830B247B0AD6009A7F72 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB02830A247B0AD6009A7F72 /* AddItemViewController.swift */; };
 		ABA9EBF9247AC4E800594731 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA9EBF8247AC4E800594731 /* AppDelegate.swift */; };
 		ABA9EBFB247AC4E800594731 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA9EBFA247AC4E800594731 /* SceneDelegate.swift */; };
-		ABA9EBFD247AC4E800594731 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA9EBFC247AC4E800594731 /* ViewController.swift */; };
 		ABA9EC00247AC4E800594731 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABA9EBFE247AC4E800594731 /* Main.storyboard */; };
 		ABA9EC03247AC4E800594731 /* Clipboard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ABA9EC01247AC4E800594731 /* Clipboard.xcdatamodeld */; };
 		ABA9EC05247AC4EB00594731 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABA9EC04247AC4EB00594731 /* Assets.xcassets */; };
 		ABA9EC08247AC4EB00594731 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABA9EC06247AC4EB00594731 /* LaunchScreen.storyboard */; };
+		ABA9EC10247AE1BF00594731 /* Clip.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA9EC0F247AE1BF00594731 /* Clip.swift */; };
+		ABA9EC14247AE58D00594731 /* ClipboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA9EC13247AE58D00594731 /* ClipboardTableViewController.swift */; };
+		ABA9EC18247AF67400594731 /* ClipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA9EC17247AF67400594731 /* ClipCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB02830A247B0AD6009A7F72 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		ABA9EBF5247AC4E800594731 /* Clipboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clipboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABA9EBF8247AC4E800594731 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABA9EBFA247AC4E800594731 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ABA9EBFC247AC4E800594731 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		ABA9EBFF247AC4E800594731 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ABA9EC02247AC4E800594731 /* Clipboard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Clipboard.xcdatamodel; sourceTree = "<group>"; };
 		ABA9EC04247AC4EB00594731 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ABA9EC07247AC4EB00594731 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ABA9EC09247AC4EB00594731 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABA9EC0F247AE1BF00594731 /* Clip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clip.swift; sourceTree = "<group>"; };
+		ABA9EC13247AE58D00594731 /* ClipboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardTableViewController.swift; sourceTree = "<group>"; };
+		ABA9EC17247AF67400594731 /* ClipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +45,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB56043F247B03500028A3B3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ABA9EC13247AE58D00594731 /* ClipboardTableViewController.swift */,
+				AB02830A247B0AD6009A7F72 /* AddItemViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		AB560440247B03E20028A3B3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AB560444247B04C30028A3B3 /* Storyboards */,
+				AB560441247B03EB0028A3B3 /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AB560441247B03EB0028A3B3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				ABA9EC17247AF67400594731 /* ClipCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		AB560442247B04280028A3B3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ABA9EC04247AC4EB00594731 /* Assets.xcassets */,
+				ABA9EC09247AC4EB00594731 /* Info.plist */,
+				ABA9EC01247AC4E800594731 /* Clipboard.xcdatamodeld */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AB560443247B043E0028A3B3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ABA9EC0F247AE1BF00594731 /* Clip.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AB560444247B04C30028A3B3 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				ABA9EBFE247AC4E800594731 /* Main.storyboard */,
+				ABA9EC06247AC4EB00594731 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		AB560445247B04D40028A3B3 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				ABA9EBF8247AC4E800594731 /* AppDelegate.swift */,
+				ABA9EBFA247AC4E800594731 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		ABA9EBEC247AC4E800594731 = {
 			isa = PBXGroup;
 			children = (
@@ -58,14 +126,11 @@
 		ABA9EBF7247AC4E800594731 /* Clipboard */ = {
 			isa = PBXGroup;
 			children = (
-				ABA9EBF8247AC4E800594731 /* AppDelegate.swift */,
-				ABA9EBFA247AC4E800594731 /* SceneDelegate.swift */,
-				ABA9EBFC247AC4E800594731 /* ViewController.swift */,
-				ABA9EBFE247AC4E800594731 /* Main.storyboard */,
-				ABA9EC04247AC4EB00594731 /* Assets.xcassets */,
-				ABA9EC06247AC4EB00594731 /* LaunchScreen.storyboard */,
-				ABA9EC09247AC4EB00594731 /* Info.plist */,
-				ABA9EC01247AC4E800594731 /* Clipboard.xcdatamodeld */,
+				AB560445247B04D40028A3B3 /* Application */,
+				AB560442247B04280028A3B3 /* Resources */,
+				AB560440247B03E20028A3B3 /* Views */,
+				AB56043F247B03500028A3B3 /* Controllers */,
+				AB560443247B043E0028A3B3 /* Model */,
 			);
 			path = Clipboard;
 			sourceTree = "<group>";
@@ -141,10 +206,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABA9EBFD247AC4E800594731 /* ViewController.swift in Sources */,
 				ABA9EBF9247AC4E800594731 /* AppDelegate.swift in Sources */,
+				ABA9EC14247AE58D00594731 /* ClipboardTableViewController.swift in Sources */,
+				ABA9EC10247AE1BF00594731 /* Clip.swift in Sources */,
 				ABA9EC03247AC4E800594731 /* Clipboard.xcdatamodeld in Sources */,
+				AB02830B247B0AD6009A7F72 /* AddItemViewController.swift in Sources */,
 				ABA9EBFB247AC4E800594731 /* SceneDelegate.swift in Sources */,
+				ABA9EC18247AF67400594731 /* ClipCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +358,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4W9U25F9BB;
-				INFOPLIST_FILE = Clipboard/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Clipboard/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -308,7 +377,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4W9U25F9BB;
-				INFOPLIST_FILE = Clipboard/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Clipboard/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
