@@ -12,5 +12,5 @@ import UIKit
 struct Clip {
     var title: String
     var link: String
-    var favicon: UIImage?
+    var favicon: UIImage = UIImage(named: "default_favicon")!
 }

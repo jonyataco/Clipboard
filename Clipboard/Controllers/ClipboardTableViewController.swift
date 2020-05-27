@@ -10,43 +10,46 @@ import UIKit
 import Foundation
 
 class ClipboardTableViewController: UITableViewController {
-    var items: [Clip] = [Clip(title: "Reinforcement Learning Reference", link: URL(string: "www.google.com")!.absoluteString), Clip(title: "COD Plays", link: URL(string: "www.youtube.com")!.absoluteString)]
+    var items: [Clip] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.tableFooterView = UIView()
+        setupSearchBar()
+        setupData()
+    }
+    
+    func setupSearchBar() -> Void {
         navigationItem.searchController = UISearchController(searchResultsController: nil)
         navigationItem.hidesSearchBarWhenScrolling = false
-//        for _ in 1...10 {
-//            items.append(Clip(title: "Reinforcement Learning Reference", link: URL(string: "www.google.com")!.absoluteString))
-//        }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
-    // MARK: - Table view data source
-
+    
+    func setupData() {
+        for _ in 1...10 {
+            items.append(Clip(title: "Hello", link: "www.youtube.com"))
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return items.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        // Configuring the cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "clipCell", for: indexPath) as! ClipCell
         cell.titleLabel.text = items[indexPath.row].title
         cell.linkLabel.text = items[indexPath.row].link
-        cell.faviconImage.image = UIImage(named: "default_favicon")
+        cell.faviconImage.image = items[indexPath.row].favicon
         
+        // The URL String to fetch the favicon
         let faviconURLString = "https://s2.googleusercontent.com/s2/favicons?domain_url=" + items[indexPath.row].link
-        if let url = URL(string: faviconURLString) {
+        
+        // Network call to get the favicon item.
+        if let _ = URL(string: faviconURLString) {
             let task = URLSession.shared.dataTask(with: URL(string: faviconURLString)!, completionHandler: { (data, response, error) in
                 guard let data = data, let image = UIImage(data: data) else { return }
                 DispatchQueue.main.async {
@@ -60,8 +63,7 @@ class ClipboardTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let pasteboard = UIPasteboard.general
-        pasteboard.string = items[indexPath.row].link
+        copyLinkToClipboard(link: items[indexPath.row].link)
         createPopUp()
     }
     
@@ -69,80 +71,45 @@ class ClipboardTableViewController: UITableViewController {
         guard segue.identifier == "saveUnwind" else { return }
         let sourceViewController = segue.source as! AddItemViewController
         
-        if let clip = sourceViewController.clip {
+        if let clip = sourceViewController.newClip {
             let newIndexPath = IndexPath(row: items.count, section: 0)
             items.append(clip)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
     }
     
-    func createPopUp() {
-        let appView = UIApplication.shared.keyWindow?.bounds
-        print(appView)
+    func copyLinkToClipboard(link: String) {
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = link
+    }
     
-        let popupView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        popupView.backgroundColor = .red
-        popupView.center = self.view.center
-        popupView.alpha = 0
-        UIView.animate(withDuration: 0.4, animations: {
-            self.view.addSubview(popupView)
-            popupView.alpha = 1
+    func createPopUp() {
+        let visibleRect = CGRect(x: tableView.contentOffset.x, y: tableView.contentOffset.y, width: tableView.bounds.size.width, height: tableView.bounds.size.height)
+        
+        let popupText: UILabel = {
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
+            label.text = "Copied to clipboard!"
+            label.textAlignment = .center
+            label.layer.masksToBounds = true
+            label.layer.cornerRadius = 10
+            label.layer.borderWidth = 1
+            label.alpha = 0
+            label.center = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+            return label
+        }()
+    
+        self.view.addSubview(popupText)
+        
+        UIView.animate(withDuration: 0.6, animations: {
+            popupText.alpha = 1
         }) { (_) in
-            UIView.animate(withDuration: 0.4, animations: {
-                popupView.alpha = 0
+            UIView.animate(withDuration: 0.6, animations: {
+                popupText.alpha = 0
             }) { (_) in
                 UIView.animate(withDuration: 0.1, animations: {
-                    popupView.removeFromSuperview()
+                    popupText.removeFromSuperview()
                 })
             }
         }
-        
     }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
