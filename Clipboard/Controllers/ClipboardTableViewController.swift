@@ -11,6 +11,14 @@ import Foundation
 
 class ClipboardTableViewController: UITableViewController {
     var items: [Clip] = []
+    var filteredClips: [Clip] = []
+    let search = UISearchController(searchResultsController: nil)
+    var isSearchBarEmpty: Bool {
+        return search.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering: Bool {
+        return search.isActive && !isSearchBarEmpty
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,8 +27,9 @@ class ClipboardTableViewController: UITableViewController {
     }
     
     func setupSearchBar() -> Void {
-        navigationItem.searchController = UISearchController(searchResultsController: nil)
+        navigationItem.searchController = search
         navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.searchController?.searchResultsUpdater = self
     }
     
     func setupData() {
@@ -34,19 +43,27 @@ class ClipboardTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        if isFiltering {
+            return filteredClips.count
+        } else {
+            return items.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
         // Configuring the cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "clipCell", for: indexPath) as! ClipCell
-        cell.titleLabel.text = items[indexPath.row].title
-        cell.linkLabel.text = items[indexPath.row].link
-        cell.faviconImage.image = items[indexPath.row].favicon
-        
+        if isFiltering {
+            cell.titleLabel.text = filteredClips[indexPath.row].title
+            cell.linkLabel.text = filteredClips[indexPath.row].link
+            cell.faviconImage.image = filteredClips[indexPath.row].favicon
+        } else {
+            cell.titleLabel.text = items[indexPath.row].title
+            cell.linkLabel.text = items[indexPath.row].link
+            cell.faviconImage.image = items[indexPath.row].favicon
+        }
         // The URL String to fetch the favicon
-        let faviconURLString = "https://s2.googleusercontent.com/s2/favicons?domain_url=" + items[indexPath.row].link
+        let faviconURLString = "https://s2.googleusercontent.com/s2/favicons?domain_url=" + cell.linkLabel.text!
         
         // Network call to get the favicon item.
         if let _ = URL(string: faviconURLString) {
@@ -111,5 +128,18 @@ class ClipboardTableViewController: UITableViewController {
                 })
             }
         }
+    }
+}
+
+extension ClipboardTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(search.searchBar.text!)
+    }
+    
+    func filterContentForSearchText(_ searchText: String) {
+        filteredClips = items.filter( {(item: Clip) -> Bool in
+            return item.title.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
     }
 }
