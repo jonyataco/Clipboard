@@ -10,7 +10,7 @@
         <!--Clipboard 📋-->
         <scene sceneID="at0-ki-j65">
             <objects>
-                <tableViewController id="ab9-KK-ifS" customClass="ClipboardTableViewController" customModule="Clipboard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ClipboardTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ab9-KK-ifS" customClass="ClipboardTableViewController" customModule="Clipboard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="sdb-RH-XZK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,7 +82,7 @@
         <!--Navigation Controller-->
         <scene sceneID="7WL-VA-cRm">
             <objects>
-                <navigationController id="UGp-hi-UZX" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="First" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UGp-hi-UZX" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="7rJ-Ku-xsP">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -98,7 +98,7 @@
         <!--Navigation Controller-->
         <scene sceneID="oVa-1X-Uwd">
             <objects>
-                <navigationController id="oEr-mW-Ahn" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AddItemController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oEr-mW-Ahn" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pbB-Xe-oHt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -114,7 +114,7 @@
         <!--Add Item-->
         <scene sceneID="v2I-y3-3IZ">
             <objects>
-                <viewController id="0aS-2Y-Ycv" customClass="AddItemViewController" customModule="Clipboard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddItemViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0aS-2Y-Ycv" customClass="AddItemViewController" customModule="Clipboard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dNa-qo-gcU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

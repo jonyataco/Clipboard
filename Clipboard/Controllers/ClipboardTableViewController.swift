@@ -8,8 +8,11 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 class ClipboardTableViewController: UITableViewController {
+
+    var container: NSPersistentContainer!
     var items: [Clip] = []
     var filteredClips: [Clip] = []
     let search = UISearchController(searchResultsController: nil)
@@ -24,6 +27,9 @@ class ClipboardTableViewController: UITableViewController {
         super.viewDidLoad()
         setupSearchBar()
         setupData()
+        if container != nil {
+            print("The data container has been setup correctly")
+        }
     }
     
     func setupSearchBar() -> Void {
