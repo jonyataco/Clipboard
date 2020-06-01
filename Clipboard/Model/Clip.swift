@@ -8,9 +8,17 @@
 
 import Foundation
 import UIKit
+import CoreData
 
-struct Clip {
-    var title: String
-    var link: String
-    var favicon: UIImage = UIImage(named: "default_favicon")!
+class Clip: NSManagedObject {
+
+    // class method that creates a Clip.
+    // If no favicon is given, it uses the default asset.
+    class func createClip(title: String, link: String, favicon: Data? = UIImage(named: "default_favicon")?.pngData()) -> Clip {
+        let clip = Clip(context: AppDelegate.persistantContainer.viewContext)
+        clip.title = title
+        clip.link = link
+        clip.favicon = favicon
+        return clip
+    }
 }

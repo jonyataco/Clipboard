@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddItemViewController: UIViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -14,6 +15,7 @@ class AddItemViewController: UIViewController {
     @IBOutlet weak var urlTextField: UITextField!
     
     var newClip: Clip?
+    var container: NSPersistentContainer = AppDelegate.persistantContainer
     
     @IBAction func cancelButtonPressed(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
@@ -45,6 +47,11 @@ class AddItemViewController: UIViewController {
         let title = nameTextField.text!
         let urlLink = urlTextField.text!
         
-        newClip = Clip(title: title, link: urlLink)
+        newClip = Clip.createClip(title: title, link: urlLink)
+        do {
+            try container.viewContext.save()
+        } catch {
+            print(error)
+        }
     }
 }

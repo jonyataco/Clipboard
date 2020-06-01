@@ -26,8 +26,8 @@ class ClipboardTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         setupSearchBar()
-        setupData()
         if container != nil {
             print("The data container has been setup correctly")
         }
@@ -39,9 +39,12 @@ class ClipboardTableViewController: UITableViewController {
         navigationItem.searchController?.searchResultsUpdater = self
     }
     
-    func setupData() {
-        for _ in 1...10 {
-            items.append(Clip(title: "Hello", link: "www.youtube.com"))
+    func loadData() {
+        do {
+            let clips = try container.viewContext.fetch(Clip.fetchRequest()) as [Clip]?
+            items = clips!
+        } catch {
+            print(error)
         }
     }
     
@@ -63,11 +66,11 @@ class ClipboardTableViewController: UITableViewController {
         if isFiltering {
             cell.titleLabel.text = filteredClips[indexPath.row].title
             cell.linkLabel.text = filteredClips[indexPath.row].link
-            cell.faviconImage.image = filteredClips[indexPath.row].favicon
+            cell.faviconImage.image = UIImage(data: filteredClips[indexPath.row].favicon!)
         } else {
             cell.titleLabel.text = items[indexPath.row].title
             cell.linkLabel.text = items[indexPath.row].link
-            cell.faviconImage.image = items[indexPath.row].favicon
+            cell.faviconImage.image = UIImage(data: items[indexPath.row].favicon!)
         }
         // The URL String to fetch the favicon
         let faviconURLString = "https://s2.googleusercontent.com/s2/favicons?domain_url=" + cell.linkLabel.text!
@@ -87,7 +90,7 @@ class ClipboardTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        copyLinkToClipboard(link: items[indexPath.row].link)
+        copyLinkToClipboard(link: items[indexPath.row].link!)
         createPopUp()
     }
     
@@ -96,6 +99,7 @@ class ClipboardTableViewController: UITableViewController {
         let sourceViewController = segue.source as! AddItemViewController
         
         if let clip = sourceViewController.newClip {
+            print("new clip has been grabbed")
             let newIndexPath = IndexPath(row: items.count, section: 0)
             items.append(clip)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
@@ -145,7 +149,7 @@ extension ClipboardTableViewController: UISearchResultsUpdating {
     
     func filterContentForSearchText(_ searchText: String) {
         filteredClips = items.filter( {(item: Clip) -> Bool in
-            return item.title.lowercased().contains(searchText.lowercased())
+            return item.title!.lowercased().contains(searchText.lowercased())
         })
         tableView.reloadData()
     }
