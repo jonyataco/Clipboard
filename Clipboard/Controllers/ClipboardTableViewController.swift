@@ -12,10 +12,11 @@ import CoreData
 
 class ClipboardTableViewController: UITableViewController {
 
-    var container: NSPersistentContainer!
+    var container: NSPersistentContainer! = AppDelegate.persistantContainer
     var items: [Clip] = []
     var filteredClips: [Clip] = []
     let search = UISearchController(searchResultsController: nil)
+    
     var isSearchBarEmpty: Bool {
         return search.searchBar.text?.isEmpty ?? true
     }
